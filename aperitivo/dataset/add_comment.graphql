@@ -1,0 +1,231 @@
+mutation addComment($user: UserRef = {}) {
+  addComment(input: {commentContent: "Fake comment", user: $user}) {
+    comment {
+      voteCount
+      user
+      id
+      commentContent
+    }
+  }
+}
+
+
+mutation {
+  addComment(input: [
+    {
+      commentContent: "Great post! I love hiking and the mountain view is breathtaking.",
+      user: { id: "0x1a5048a6cf" },
+      post: { id: "0x1a5048a711" },
+      voteCount: 5
+    },
+    {
+      commentContent: "The music at this place is amazing. A perfect night out!",
+      user: { id: "0x1a5048a6d0" },
+      post: { id: "0x1a5048a712" },
+      voteCount: 8
+    },
+    {
+      commentContent: "I'm inspired by the environmental initiatives. Let's save the planet together!",
+      user: { id: "0x1a5048a6d3" },
+      post: { id: "0x1a5048a713" },
+      voteCount: 12
+    },
+    {
+      commentContent: "I had a great time exploring the city lights. Highly recommended!",
+      user: { id: "0x1a5048a6cd" },
+      post: { id: "0x1a5048a714" },
+      voteCount: 6
+    },
+    {
+      commentContent: "Fashion trends are always changing, but style is eternal.",
+      user: { id: "0x1a5048a6ce" },
+      post: { id: "0x1a5048a715" },
+      voteCount: 15
+    },
+    {
+      commentContent: "Yoga and mindfulness have transformed my life. Namaste!",
+      user: { id: "0x1a5048a6d1" },
+      post: { id: "0x1a5048a716" },
+      voteCount: 10
+    },
+    {
+      commentContent: "Artistic creations can touch the soul. Keep painting!",
+      user: { id: "0x1a5048a6d2" },
+      post: { id: "0x1a5048a717" },
+      voteCount: 7
+    },
+    {
+      commentContent: "Adventures beyond limits sound thrilling! Can't wait to try them!",
+      user: { id: "0x1a5048a6d4" },
+      post: { id: "0x1a5048a718" },
+      voteCount: 9
+    },
+    {
+      commentContent: "Tech world updates are always fascinating. Keep us informed!",
+      user: { id: "0x1a5048a6d5" },
+      post: { id: "0x1a5048a719" },
+      voteCount: 11
+    },
+    {
+      commentContent: "Tasting global cuisine is a delightful experience. I've tried it!",
+      user: { id: "0x1a5048a6d6" },
+      post: { id: "0x1a5048a71a" },
+      voteCount: 4
+    }
+  ]) {
+    comment {
+      id
+      commentContent
+      voteCount
+      user {
+        id
+        userName
+      }
+      post {
+        id
+        title
+      }
+    }
+  }
+}
+
+
+
+{
+  "data": {
+    "addComment": {
+      "comment": [
+        {
+          "id": "0x1a5048a72a",
+          "commentContent": "Adventures beyond limits sound thrilling! Can't wait to try them!",
+          "voteCount": 9,
+          "user": {
+            "id": "0x1a5048a6d4",
+            "userName": "Isaac Martinez"
+          },
+          "post": {
+            "id": "0x1a5048a718",
+            "title": "Adventures Beyond Limits"
+          }
+        },
+        {
+          "id": "0x1a5048a72b",
+          "commentContent": "Tech world updates are always fascinating. Keep us informed!",
+          "voteCount": 11,
+          "user": {
+            "id": "0x1a5048a6d5",
+            "userName": "Bob Smith"
+          },
+          "post": {
+            "id": "0x1a5048a719",
+            "title": "Tech World Updates"
+          }
+        },
+        {
+          "id": "0x1a5048a72c",
+          "commentContent": "Tasting global cuisine is a delightful experience. I've tried it!",
+          "voteCount": 4,
+          "user": {
+            "id": "0x1a5048a6d6",
+            "userName": "Charlie Brown"
+          },
+          "post": {
+            "id": "0x1a5048a71a",
+            "title": "Tasting Global Cuisine"
+          }
+        },
+        {
+          "id": "0x1a5048a72d",
+          "commentContent": "The music at this place is amazing. A perfect night out!",
+          "voteCount": 8,
+          "user": {
+            "id": "0x1a5048a6d0",
+            "userName": "Frank Wilson"
+          },
+          "post": {
+            "id": "0x1a5048a712",
+            "title": "Music in the Night"
+          }
+        },
+        {
+          "id": "0x1a5048a72e",
+          "commentContent": "I had a great time exploring the city lights. Highly recommended!",
+          "voteCount": 6,
+          "user": {
+            "id": "0x1a5048a6cd",
+            "userName": "Hannah Miller"
+          },
+          "post": {
+            "id": "0x1a5048a714",
+            "title": "Exploring the City Lights"
+          }
+        },
+        {
+          "id": "0x1a5048a72f",
+          "commentContent": "Fashion trends are always changing, but style is eternal.",
+          "voteCount": 15,
+          "user": {
+            "id": "0x1a5048a6ce",
+            "userName": "Jessica Taylor"
+          },
+          "post": {
+            "id": "0x1a5048a715",
+            "title": "Fashion Trends for 2023"
+          }
+        },
+        {
+          "id": "0x1a5048a730",
+          "commentContent": "Artistic creations can touch the soul. Keep painting!",
+          "voteCount": 7,
+          "user": {
+            "id": "0x1a5048a6d2",
+            "userName": "Emma White"
+          },
+          "post": {
+            "id": "0x1a5048a717",
+            "title": "Artistic Creations"
+          }
+        },
+        {
+          "id": "0x1a5048a731",
+          "commentContent": "Great post! I love hiking and the mountain view is breathtaking.",
+          "voteCount": 5,
+          "user": {
+            "id": "0x1a5048a6cf",
+            "userName": "Alice Johnson"
+          },
+          "post": {
+            "id": "0x1a5048a711",
+            "title": "Hiking Adventures"
+          }
+        },
+        {
+          "id": "0x1a5048a732",
+          "commentContent": "I'm inspired by the environmental initiatives. Let's save the planet together!",
+          "voteCount": 12,
+          "user": {
+            "id": "0x1a5048a6d3",
+            "userName": "Grace Davis"
+          },
+          "post": {
+            "id": "0x1a5048a713",
+            "title": "Environmental Initiatives"
+          }
+        },
+        {
+          "id": "0x1a5048a733",
+          "commentContent": "Yoga and mindfulness have transformed my life. Namaste!",
+          "voteCount": 10,
+          "user": {
+            "id": "0x1a5048a6d1",
+            "userName": "David Lee"
+          },
+          "post": {
+            "id": "0x1a5048a716",
+            "title": "Yoga and Mindfulness"
+          }
+        }
+      ]
+    }
+  }
+}

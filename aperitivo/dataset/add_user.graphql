@@ -1,0 +1,101 @@
+mutation AddUser {
+  addUser(
+    input: [
+      {
+        userName: "Francesco L"
+      },
+      {
+        userName: "Franky J"
+      },
+      {
+        userName: "Luca C"
+      }
+    ]
+  ) {
+    user {
+      id
+      userName
+    }
+  }
+}
+
+mutation {
+  addUser(input: [
+    { userName: "Alice Johnson", bio: "Lover of all things outdoors. Passionate about hiking, camping, and exploring new places." },
+    { userName: "Bob Smith", bio: "Tech enthusiast, coding wizard, and coffee addict. Always up for a good book or a new coding challenge." },
+    { userName: "Charlie Brown", bio: "Foodie and travel enthusiast. On a mission to taste the world's flavors, one dish at a time." },
+    { userName: "David Lee", bio: "Fitness freak, yoga practitioner, and mindfulness advocate. Finding balance in life is my mantra." },
+    { userName: "Emma White", bio: "Art lover and aspiring painter. Capturing the beauty of life on canvas is my lifelong dream." },
+    { userName: "Frank Wilson", bio: "Musician by day, gamer by night. Exploring virtual worlds and creating melodies in the real world." },
+    { userName: "Grace Davis", bio: "Animal lover and environmentalist. Working towards a greener and more compassionate planet." },
+    { userName: "Hannah Miller", bio: "Avid reader, bookworm, and literature enthusiast. Lost in the world of words." },
+    { userName: "Isaac Martinez", bio: "Adventure seeker and adrenaline junkie. Skydiving, bungee jumping, and more!" },
+    { userName: "Jessica Taylor", bio: "Fashionista with a passion for design and style. Turning outfits into art." }
+  ]) {
+    user {
+      id
+      userName
+      bio
+    }
+  }
+}
+
+
+{
+  "data": {
+    "addUser": {
+      "user": [
+        {
+          "id": "0x1a5048a6cd",
+          "userName": "Hannah Miller",
+          "bio": "Avid reader, bookworm, and literature enthusiast. Lost in the world of words."
+        },
+        {
+          "id": "0x1a5048a6ce",
+          "userName": "Jessica Taylor",
+          "bio": "Fashionista with a passion for design and style. Turning outfits into art."
+        },
+        {
+          "id": "0x1a5048a6cf",
+          "userName": "Alice Johnson",
+          "bio": "Lover of all things outdoors. Passionate about hiking, camping, and exploring new places."
+        },
+        {
+          "id": "0x1a5048a6d0",
+          "userName": "Frank Wilson",
+          "bio": "Musician by day, gamer by night. Exploring virtual worlds and creating melodies in the real world."
+        },
+        {
+          "id": "0x1a5048a6d1",
+          "userName": "David Lee",
+          "bio": "Fitness freak, yoga practitioner, and mindfulness advocate. Finding balance in life is my mantra."
+        },
+        {
+          "id": "0x1a5048a6d2",
+          "userName": "Emma White",
+          "bio": "Art lover and aspiring painter. Capturing the beauty of life on canvas is my lifelong dream."
+        },
+        {
+          "id": "0x1a5048a6d3",
+          "userName": "Grace Davis",
+          "bio": "Animal lover and environmentalist. Working towards a greener and more compassionate planet."
+        },
+        {
+          "id": "0x1a5048a6d4",
+          "userName": "Isaac Martinez",
+          "bio": "Adventure seeker and adrenaline junkie. Skydiving, bungee jumping, and more!"
+        },
+        {
+          "id": "0x1a5048a6d5",
+          "userName": "Bob Smith",
+          "bio": "Tech enthusiast, coding wizard, and coffee addict. Always up for a good book or a new coding challenge."
+        },
+        {
+          "id": "0x1a5048a6d6",
+          "userName": "Charlie Brown",
+          "bio": "Foodie and travel enthusiast. On a mission to taste the world's flavors, one dish at a time."
+        }
+      ]
+    }
+  }
+}

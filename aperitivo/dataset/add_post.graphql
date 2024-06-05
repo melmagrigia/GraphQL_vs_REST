@@ -1,0 +1,227 @@
+mutation addPost {
+  addPost(input: {title: "post luce", user: {}, subapertivo: {}}) {
+    post {
+      id
+      title
+    }
+  }
+}
+
+mutation {
+  addPost(input: [
+    {
+      title: "Exploring the City Lights",
+      user: { id: "0x1a5048a6cd" },
+      subaperitivo: { id: "0x1a5048a6c4" },
+      voteCount: 15
+    },
+    {
+      title: "Fashion Trends for 2023",
+      user: { id: "0x1a5048a6ce" },
+      subaperitivo: { id: "0x1a5048a6c7" },
+      voteCount: 28
+    },
+    {
+      title: "Hiking Adventures",
+      user: { id: "0x1a5048a6cf" },
+      subaperitivo: { id: "0x1a5048a6c8" },
+      voteCount: 12
+    },
+    {
+      title: "Music in the Night",
+      user: { id: "0x1a5048a6d0" },
+      subaperitivo: { id: "0x1a5048a6ca" },
+      voteCount: 18
+    },
+    {
+      title: "Yoga and Mindfulness",
+      user: { id: "0x1a5048a6d1" },
+      subaperitivo: { id: "0x1a5048a6c5" },
+      voteCount: 25
+    },
+    {
+      title: "Artistic Creations",
+      user: { id: "0x1a5048a6d2" },
+      subaperitivo: { id: "0x1a5048a6cb" },
+      voteCount: 20
+    },
+    {
+      title: "Environmental Initiatives",
+      user: { id: "0x1a5048a6d3" },
+      subaperitivo: { id: "0x1a5048a6c9" },
+      voteCount: 32
+    },
+    {
+      title: "Adventures Beyond Limits",
+      user: { id: "0x1a5048a6d4" },
+      subaperitivo: { id: "0x1a5048a6cc" },
+      voteCount: 14
+    },
+    {
+      title: "Tech World Updates",
+      user: { id: "0x1a5048a6d5" },
+      subaperitivo: { id: "0x1a5048a6c6" },
+      voteCount: 22
+    },
+    {
+      title: "Tasting Global Cuisine",
+      user: { id: "0x1a5048a6d6" },
+      subaperitivo: { id: "0x1a5048a6c3" },
+      voteCount: 10
+    }
+  ]) {
+    post {
+      id
+      title
+      voteCount
+      user {
+        id
+        userName
+      }
+      subaperitivo {
+        id
+        name
+      }
+    }
+  }
+}
+
+
+{
+  "data": {
+    "addPost": {
+      "post": [
+        {
+          "id": "0x1a5048a711",
+          "title": "Hiking Adventures",
+          "voteCount": 12,
+          "user": {
+            "id": "0x1a5048a6cf",
+            "userName": "Alice Johnson"
+          },
+          "subaperitivo": {
+            "id": "0x1a5048a6c8",
+            "name": "Mountain View Tavern"
+          }
+        },
+        {
+          "id": "0x1a5048a712",
+          "title": "Music in the Night",
+          "voteCount": 18,
+          "user": {
+            "id": "0x1a5048a6d0",
+            "userName": "Frank Wilson"
+          },
+          "subaperitivo": {
+            "id": "0x1a5048a6ca",
+            "name": "The Green Oasis"
+          }
+        },
+        {
+          "id": "0x1a5048a713",
+          "title": "Environmental Initiatives",
+          "voteCount": 32,
+          "user": {
+            "id": "0x1a5048a6d3",
+            "userName": "Grace Davis"
+          },
+          "subaperitivo": {
+            "id": "0x1a5048a6c9",
+            "name": "Riverside Lounge"
+          }
+        },
+        {
+          "id": "0x1a5048a714",
+          "title": "Exploring the City Lights",
+          "voteCount": 15,
+          "user": {
+            "id": "0x1a5048a6cd",
+            "userName": "Hannah Miller"
+          },
+          "subaperitivo": {
+            "id": "0x1a5048a6c4",
+            "name": "Urban Oasis Cafe"
+          }
+        },
+        {
+          "id": "0x1a5048a715",
+          "title": "Fashion Trends for 2023",
+          "voteCount": 28,
+          "user": {
+            "id": "0x1a5048a6ce",
+            "userName": "Jessica Taylor"
+          },
+          "subaperitivo": {
+            "id": "0x1a5048a6c7",
+            "name": "La Piazza"
+          }
+        },
+        {
+          "id": "0x1a5048a716",
+          "title": "Yoga and Mindfulness",
+          "voteCount": 25,
+          "user": {
+            "id": "0x1a5048a6d1",
+            "userName": "David Lee"
+          },
+          "subaperitivo": {
+            "id": "0x1a5048a6c5",
+            "name": "Garden Retreat"
+          }
+        },
+        {
+          "id": "0x1a5048a717",
+          "title": "Artistic Creations",
+          "voteCount": 20,
+          "user": {
+            "id": "0x1a5048a6d2",
+            "userName": "Emma White"
+          },
+          "subaperitivo": {
+            "id": "0x1a5048a6cb",
+            "name": "Beachside Bistro"
+          }
+        },
+        {
+          "id": "0x1a5048a718",
+          "title": "Adventures Beyond Limits",
+          "voteCount": 14,
+          "user": {
+            "id": "0x1a5048a6d4",
+            "userName": "Isaac Martinez"
+          },
+          "subaperitivo": {
+            "id": "0x1a5048a6cc",
+            "name": "Harbor Cafe"
+          }
+        },
+        {
+          "id": "0x1a5048a719",
+          "title": "Tech World Updates",
+          "voteCount": 22,
+          "user": {
+            "id": "0x1a5048a6d5",
+            "userName": "Bob Smith"
+          },
+          "subaperitivo": {
+            "id": "0x1a5048a6c6",
+            "name": "Café del Sol"
+          }
+        },
+        {
+          "id": "0x1a5048a71a",
+          "title": "Tasting Global Cuisine",
+          "voteCount": 10,
+          "user": {
+            "id": "0x1a5048a6d6",
+            "userName": "Charlie Brown"
+          },
+          "subaperitivo": {
+            "id": "0x1a5048a6c3",
+            "name": "City Lights Bistro"
+          }
+        }
+      ]
+    }
+  }
+}

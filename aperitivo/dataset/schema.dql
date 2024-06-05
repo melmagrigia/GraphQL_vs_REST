@@ -1,0 +1,84 @@
+type Comment {
+  id: ID!
+  commentContent: String!
+  user: User! @hasInverse(field:"comments")
+  post: Post! @hasInverse(field:"comments")
+  voteCount: Int
+}
+
+type Post {
+  id: ID!
+  title: String!
+  user: User! @hasInverse(field:"posts")
+  voteCount: Int
+  comments: [Comment] @hasInverse(field:"post")
+}
+
+type User {
+  id: ID!
+  userName: String! @search(by:[exact])
+  bio: String
+  comments: [Comment] @hasInverse(field:"user")
+  posts: [Post] @hasInverse(field:"user")
+}
+
+
+name: string @index(term) .
+release_date: datetime @index(year) .
+revenue: float .
+running_time: int .
+starring: [uid] .
+director: [uid] .
+
+type Person {
+  name
+}
+
+type Film {
+  name
+  release_date
+  revenue
+  running_time
+  starring
+  director
+}
+
+Comment.id: 
+Comment.commentContent:
+Comment.user:
+Comment.post:
+Comment.voteCount:
+Post.id:
+Post.title:
+Post.user:
+Post.voteCount:
+Post.comments:
+User.id:
+User.userName:
+User.bio:
+User.comments:
+User.posts:
+
+type Comment {
+  id
+  commentContent
+  user
+  post
+  voteCount
+}
+
+type Post {
+  id
+  title
+  user
+  voteCount
+  comments
+}
+
+type User {
+  id
+  userName
+  bio
+  comments
+  posts
+}

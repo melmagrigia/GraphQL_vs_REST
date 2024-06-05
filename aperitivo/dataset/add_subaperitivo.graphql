@@ -1,0 +1,105 @@
+mutation AddSubaperitivo {
+  addSubapertivo(
+    input: [
+      {
+        name: "1984"
+        description: "A dystopian social science fiction novel by English novelist George Orwell." 
+      },
+      {
+        name: "fahrenheit451"
+        description: "A future American society where books are outlawed and firemen burn any that are found." 
+      },
+      {
+        name: "thecatcherintherye"
+        description: "Holden Caulfield, an angry, depressed 16-year-old, lives in an unspecified institution in California after the end of World War II." 
+      }
+    ]
+  ) {
+    subapertivo {
+      id
+      name
+      description
+    }
+  }
+}
+
+
+mutation {
+  addSubaperitivo(input: [
+    { name: "Café del Sol", description: "A cozy cafe with a sunny atmosphere, perfect for a relaxing afternoon coffee." },
+    { name: "La Piazza", description: "An Italian-style piazza offering delicious pizzas and pasta in the heart of the city." },
+    { name: "The Green Oasis", description: "A lush green oasis amidst the urban jungle, known for its serene ambiance." },
+    { name: "Beachside Bistro", description: "Enjoy fresh seafood and cocktails with a view of the beautiful beach at our bistro." },
+    { name: "Mountain View Tavern", description: "A rustic tavern nestled in the mountains, serving hearty meals and local brews." },
+    { name: "Harbor Cafe", description: "A charming cafe by the harbor, where you can watch boats sail by as you sip your coffee." },
+    { name: "Riverside Lounge", description: "Relax by the riverside with cocktails, live music, and a vibrant atmosphere." },
+    { name: "City Lights Bistro", description: "An elegant bistro offering fine dining with a stunning view of the city lights." },
+    { name: "Urban Oasis Cafe", description: "An oasis of calm in the urban chaos, serving organic coffee and healthy snacks." },
+    { name: "Garden Retreat", description: "Escape to a garden paradise with serene surroundings and delectable treats." }
+  ]) {
+    subaperitivo {
+      id
+      name
+      description
+    }
+  }
+}
+
+{
+  "data": {
+    "addSubaperitivo": {
+      "subaperitivo": [
+        {
+          "id": "0x1a5048a6c3",
+          "name": "City Lights Bistro",
+          "description": "An elegant bistro offering fine dining with a stunning view of the city lights."
+        },
+        {
+          "id": "0x1a5048a6c4",
+          "name": "Urban Oasis Cafe",
+          "description": "An oasis of calm in the urban chaos, serving organic coffee and healthy snacks."
+        },
+        {
+          "id": "0x1a5048a6c5",
+          "name": "Garden Retreat",
+          "description": "Escape to a garden paradise with serene surroundings and delectable treats."
+        },
+        {
+          "id": "0x1a5048a6c6",
+          "name": "Café del Sol",
+          "description": "A cozy cafe with a sunny atmosphere, perfect for a relaxing afternoon coffee."
+        },
+        {
+          "id": "0x1a5048a6c7",
+          "name": "La Piazza",
+          "description": "An Italian-style piazza offering delicious pizzas and pasta in the heart of the city."
+        },
+        {
+          "id": "0x1a5048a6c8",
+          "name": "Mountain View Tavern",
+          "description": "A rustic tavern nestled in the mountains, serving hearty meals and local brews."
+        },
+        {
+          "id": "0x1a5048a6c9",
+          "name": "Riverside Lounge",
+          "description": "Relax by the riverside with cocktails, live music, and a vibrant atmosphere."
+        },
+        {
+          "id": "0x1a5048a6ca",
+          "name": "The Green Oasis",
+          "description": "A lush green oasis amidst the urban jungle, known for its serene ambiance."
+        },
+        {
+          "id": "0x1a5048a6cb",
+          "name": "Beachside Bistro",
+          "description": "Enjoy fresh seafood and cocktails with a view of the beautiful beach at our bistro."
+        },
+        {
+          "id": "0x1a5048a6cc",
+          "name": "Harbor Cafe",
+          "description": "A charming cafe by the harbor, where you can watch boats sail by as you sip your coffee."
+        }
+      ]
+    }
+  }
+}
