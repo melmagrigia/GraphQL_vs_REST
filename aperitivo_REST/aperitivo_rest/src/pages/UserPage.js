@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { User } from "../components/User";
 import { Post } from "../components/Post";
 import { Comment } from "../components/Comment";
@@ -6,27 +6,46 @@ import { LoadingSpinner } from "../components/LoadingSpinner";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { useParams } from "react-router-dom";
 import { Container, ListGroup } from "react-bootstrap";
+import axios from 'axios';
 
 export const UserPage = () => {
   let { id } = useParams();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/users/${id}`);
+        setUser(response.data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, [id]);
 
   return (
     <Container className="p-3">
       {loading && <LoadingSpinner />}
       {error && <ErrorMessage error={error} />}
-      {data &&
-        (data?.queryUser.length ? (
+      {user &&
+         (
           <>
             <User
-              userName={data.queryUser[0].userName}
-              bio={data.queryUser[0].bio}
-              postCount={data.queryUser[0].postsAggregate?.count}
-              commentCount={data.queryUser[0].commentsAggregate?.count}
+              userName={user.userName}
+              bio={user.bio}
+              postCount={user.postsAggregate?.count}
+              commentCount={user.commentsAggregate?.count}
             />
             <h2>Posts</h2>
             <div className="postsSection">
-              {data.queryUser[0].posts.length ? (
-                data.queryUser[0].posts.map((post) => (
+              {user.posts.length ? (
+                user.posts.map((post) => (
                   <ListGroup>
                     <Post
                       key={post.id}
@@ -47,8 +66,8 @@ export const UserPage = () => {
             </div>
             <h2>Comments</h2>
             <div className="commentsSection">
-              {data.queryUser[0].comments.length ? (
-                data.queryUser[0].comments.map((comment) => (
+              {user.comments.length ? (
+                user.comments.map((comment) => (
                   <ListGroup>
                     <Comment
                       key={comment.id}
@@ -66,9 +85,7 @@ export const UserPage = () => {
               )}
             </div>
           </>
-        ) : (
-          <ErrorMessage />
-        ))}
+        )}
     </Container>
   );
 };
