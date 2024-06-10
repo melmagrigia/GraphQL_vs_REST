@@ -12,6 +12,37 @@ services:
       - pgdata:/var/lib/postgresql/data
       - ./aperitivo_REST/dataset/schema.sql:/docker-entrypoint-initdb.d/1_schema.sql
       - ./aperitivo_REST/dataset/data.sql:/docker-entrypoint-initdb.d/2_data.sql
+  zero:
+    image: dgraph/dgraph:latest
+    container_name: dgraph_zero
+    volumes:
+      - dgraph:/dgraph
+    ports:
+      - "5080:5080"
+      - "6080:6080"
+    command: dgraph zero --my=zero:5080
+
+  alpha:
+    image: dgraph/dgraph:latest
+    container_name: dgraph_alpha
+    volumes:
+      - dgraph:/dgraph
+      - ./init-db.sh:/init-db.sh
+      - ./aperitivo/dataset/schema.graphql:/schema.graphql
+    ports:
+      - "8080:8080"
+      - "9080:9080"
+    command: dgraph alpha --my=alpha:7080 --zero=zero:5080 --security whitelist=0.0.0.0/0
+    depends_on:
+      - zero
+
+  ratel:
+    image: dgraph/ratel:latest
+    container_name: dgraph_ratel
+    ports:
+      - "8000:8000"
+    command: dgraph-ratel
 
 volumes:
   pgdata:
+  dgraph:
