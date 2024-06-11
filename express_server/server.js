@@ -90,42 +90,64 @@ app.get('/posts/:id', async (req, res) => {
   }
 });
 
-// New endpoint for fetching Subaperitivos and Users data
 app.get('/', async (req, res) => {
   try {
-    // Fetch Subaperitivos
-    const subaperitivoQuery = `
+    const subaperitivosQuery = `
       SELECT name, description
       FROM Subaperitivos
+      LIMIT 50
     `;
-    const subaperitivoResult = await pool.query(subaperitivoQuery);
-    const subaperitivos = subaperitivoResult.rows;
-
-    // Fetch Users with aggregate data
-    const userQuery = `
-      SELECT u.userName, u.bio,
-             (SELECT COUNT(*) FROM Posts p WHERE p.userId = u.id) AS postsCount,
-             (SELECT COUNT(*) FROM Comments c WHERE c.userId = u.id) AS commentsCount
-      FROM Users u
+    
+    const usersQuery = `
+      SELECT id, userName, bio
+      FROM Users
+      LIMIT 50
     `;
-    const userResult = await pool.query(userQuery);
-    const users = userResult.rows.map(row => ({
-      userName: row.username,
-      bio: row.bio,
-      postsAggregate: { count: row.postscount },
-      commentsAggregate: { count: row.commentscount },
-    }));
 
-    // Construct the response
-    const response = {
-      subaperitivos: subaperitivos,
-      users: users,
+    const postsCountQuery = `
+      SELECT userId, COUNT(*) AS count
+      FROM Posts
+      GROUP BY userId
+    `;
+
+    const commentsCountQuery = `
+      SELECT userId, COUNT(*) AS count
+      FROM Comments
+      GROUP BY userId
+    `;
+
+    const [subaperitivosResult, usersResult, postsCountResult, commentsCountResult] = await Promise.all([
+      pool.query(subaperitivosQuery),
+      pool.query(usersQuery),
+      pool.query(postsCountQuery),
+      pool.query(commentsCountQuery),
+    ]);
+
+    const users = usersResult.rows.map(user => {
+      const postsCount = postsCountResult.rows.find(post => post.userid === user.id);
+      const commentsCount = commentsCountResult.rows.find(comment => comment.userid === user.id);
+
+      return {
+        userName: user.username,
+        bio: user.bio,
+        postsAggregate: {
+          count: postsCount ? postsCount.count : 0,
+        },
+        commentsAggregate: {
+          count: commentsCount ? commentsCount.count : 0,
+        },
+      };
+    });
+
+    const data = {
+      querySubaperitivo: subaperitivosResult.rows,
+      queryUser: users,
     };
 
-    res.json(response);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.json(data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
   }
 });
 

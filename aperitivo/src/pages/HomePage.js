@@ -8,11 +8,11 @@ import { Container, ListGroup } from "react-bootstrap";
 
 const FETCH_SUBAPERITIVOS_AND_USERS = gql`
   query FetchSubaperitivosAndUsers {
-    querySubaperitivo {
+    querySubaperitivo(first: 50) {
       name
       description
     }
-    queryUser {
+    queryUser(first: 50) {
       userName
       bio
       postsAggregate {
