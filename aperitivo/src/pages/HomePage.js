@@ -31,8 +31,8 @@ export const HomePage = () => {
   return (
     <Container className="p-3">
       <p>
-        Welcome to Aperitivo, a community of bookworms discussing their favorite
-        books! Find a subaperitivo to browse or a user to follow below.
+        Welcome to Aperitivo, a community of alcoholics discussing their favorite
+        drinks! Find a subaperitivo to browse or a user to follow below.
       </p>
       <h2>Popular Subaperitivos</h2>
       {loading && <LoadingSpinner />}

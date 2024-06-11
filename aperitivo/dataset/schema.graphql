@@ -1,5 +1,5 @@
 type Comment {
-  id: ID!
+  id: String! @id
   commentContent: String!
   user: User! @hasInverse(field:"comments")
   post: Post! @hasInverse(field:"comments")
@@ -7,7 +7,7 @@ type Comment {
 }
 
 type Subaperitivo {
-  id: ID!
+  id: String! @id
   name: String! @search(by:[exact])
   description: String
   posts: [Post] @hasInverse(field:"subaperitivo")
@@ -15,7 +15,7 @@ type Subaperitivo {
 
 
 type Post {
-  id: ID!
+  id: String! @id
   title: String!
   user: User! @hasInverse(field:"posts")
   subaperitivo: Subaperitivo! @hasInverse(field:"posts")
@@ -25,7 +25,7 @@ type Post {
 
 
 type User {
-  id: ID!
+  id: String! @id
   userName: String! @search(by:[exact])
   bio: String
   comments: [Comment] @hasInverse(field:"user")

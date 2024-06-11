@@ -140,8 +140,8 @@ app.get('/', async (req, res) => {
     });
 
     const data = {
-      querySubaperitivo: subaperitivosResult.rows,
-      queryUser: users,
+      subaperitivos: subaperitivosResult.rows,
+      users: users,
     };
 
     res.json(data);
