@@ -16,7 +16,7 @@ for _ in range(NUM_USERS):
     user = {
         "id": str(uuid.uuid4()),
         "userName": fake.user_name(),
-        "bio": fake.text(max_nb_chars=200)
+        "bio": fake.text(max_nb_chars=200).replace('\n', ' ')
     }
     users.append(user)
 
@@ -26,7 +26,7 @@ for _ in range(NUM_SUBAPERITIVOS):
     subaperitivo = {
         "id": str(uuid.uuid4()),
         "name": fake.word(),
-        "description": fake.text(max_nb_chars=200)
+        "description": fake.text(max_nb_chars=200).replace('\n', ' ')
     }
     subaperitivos.append(subaperitivo)
 
@@ -47,7 +47,7 @@ comments = []
 for _ in range(NUM_COMMENTS):
     comment = {
         "id": str(uuid.uuid4()),
-        "commentContent": fake.text(max_nb_chars=200),
+        "commentContent": fake.text(max_nb_chars=200).replace('\n', ' '),
         "voteCount": random.randint(0, 1000),
         "user": random.choice(users)['id'],
         "post": random.choice(posts)['id']
