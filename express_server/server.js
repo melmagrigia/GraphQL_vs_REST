@@ -20,6 +20,13 @@ const pool = new Pool({
   port: 5432,
 });
 
+// Extract execution time from EXPLAIN ANALYZE results
+const extractExecutionTime = (explainResult) => {
+  const executionLine = explainResult.rows.find(row => row['QUERY PLAN'].includes('Execution Time'));
+  const match = executionLine['QUERY PLAN'].match(/Execution Time: (\d+\.\d+) ms/);
+  return match ? parseFloat(match[1]) : null;
+};
+
 // Endpoint to fetch post with comments
 app.get('/posts/:id', async (req, res) => {
   const postId = req.params.id;
@@ -67,6 +74,13 @@ app.get('/posts/:id', async (req, res) => {
       },
     }));
 
+    const explainPostQuery = `EXPLAIN ANALYZE ${postQuery}`;
+    
+    // Run EXPLAIN ANALYZE queries
+    const postQueryExplain = await pool.query(explainPostQuery, [postId]);
+
+    const postExecutionTime = extractExecutionTime(postQueryExplain);
+
     // Construct the response
     const response = {
       title: post.title,
@@ -81,6 +95,9 @@ app.get('/posts/:id', async (req, res) => {
         count: commentsCount,
       },
       comments: comments,
+      executionTimes: {
+        postExecutionTime: postExecutionTime,
+      }
     };
 
     res.json(response);
@@ -238,6 +255,16 @@ app.get('/users/:id', async (req, res) => {
     const commentsAggregateResult = await pool.query(commentsAggregateQuery, [userName]);
     const commentsAggregate = commentsAggregateResult.rows[0].count;
 
+    const explainCommentsQuery = `EXPLAIN ANALYZE ${commentsQuery}`;
+    const explainPostsQuery = `EXPLAIN ANALYZE ${postsQuery}`;
+
+    // Run EXPLAIN ANALYZE queries
+    const commentsQueryExplain = await pool.query(explainCommentsQuery, [userName]);
+    const postsQueryExplain = await pool.query(explainPostsQuery, [userName]);
+
+    const commentsExecutionTime = extractExecutionTime(commentsQueryExplain);
+    const postsExecutionTime = extractExecutionTime(postsQueryExplain);
+
     // Construct the response
     const response = {
       userName: user.username,
@@ -250,6 +277,10 @@ app.get('/users/:id', async (req, res) => {
       commentsAggregate: {
         count: commentsAggregate,
       },
+      executionTimes: {
+        commentsExecutionTime: commentsExecutionTime,
+        postsExecutionTime: postsExecutionTime,
+      }
     };
 
     res.json(response);
@@ -299,11 +330,21 @@ app.get('/subaperitivos/:id', async (req, res) => {
       },
     }));
 
+    const explainPostsQuery = `EXPLAIN ANALYZE ${postsQuery}`;
+
+    // Run EXPLAIN ANALYZE queries
+    const postsQueryExplain = await pool.query(explainPostsQuery, [subaperitivoName]);
+
+    const postsExecutionTime = extractExecutionTime(postsQueryExplain);
+
     // Construct the response
     const response = {
       name: subaperitivo.name,
       description: subaperitivo.description,
       posts: posts,
+      executionTimes: {
+        postsExecutionTime: postsExecutionTime,
+      }
     };
 
     res.json(response);

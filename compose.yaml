@@ -32,7 +32,7 @@ services:
     ports:
       - "8080:8080"
       - "9080:9080"
-    command: dgraph alpha --my=alpha:7080 --zero=zero:5080 --security whitelist=0.0.0.0/0
+    command: dgraph alpha --expose_trace=true --my=alpha:7080 --zero=zero:5080 --security whitelist=0.0.0.0/0
     depends_on:
       - zero
 

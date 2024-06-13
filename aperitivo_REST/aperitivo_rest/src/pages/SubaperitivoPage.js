@@ -28,6 +28,10 @@ export const SubaperitivoPage = () => {
     fetchSubaperitivo();
   }, [id]);
 
+  if (subaperitivo && subaperitivo.executionTimes) {
+    console.log(subaperitivo.executionTimes);
+  }
+
   return (
     <Container>
       {loading && <LoadingSpinner />}

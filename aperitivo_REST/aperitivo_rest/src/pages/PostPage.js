@@ -28,6 +28,10 @@ export const PostPage = () => {
     fetchPost();
   }, [id]);
 
+  if (post && post.executionTimes) {
+    console.log(post.executionTimes);
+  }
+
   return (
     <Container>
       {loading && <LoadingSpinner />}

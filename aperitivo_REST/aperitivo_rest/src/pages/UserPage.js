@@ -29,6 +29,10 @@ export const UserPage = () => {
     fetchUser();
   }, [id]);
 
+  if (user && user.executionTimes) {
+    console.log(user.executionTimes);
+  }
+
   return (
     <Container className="p-3">
       {loading && <LoadingSpinner />}
