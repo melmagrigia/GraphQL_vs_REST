@@ -1,21 +1,22 @@
 import random
 import uuid
 from faker import Faker
+from random_username.generate import generate_username
 
 fake = Faker()
 
 # Number of entries to generate
-NUM_USERS = 10
-NUM_SUBAPERITIVOS = 5
-NUM_POSTS = 50
-NUM_COMMENTS = 100
+NUM_USERS = 10000
+NUM_SUBAPERITIVOS = 5000
+NUM_POSTS = 20000
+NUM_COMMENTS = 50000
 
 # Generate Users
 users = []
 for _ in range(NUM_USERS):
     user = {
         "id": str(uuid.uuid4()),
-        "userName": fake.user_name(),
+        "userName": generate_username(1)[0],
         "bio": fake.text(max_nb_chars=200).replace('\n', ' ')
     }
     users.append(user)
@@ -25,7 +26,7 @@ subaperitivos = []
 for _ in range(NUM_SUBAPERITIVOS):
     subaperitivo = {
         "id": str(uuid.uuid4()),
-        "name": fake.word(),
+        "name": generate_username(1)[0],
         "description": fake.text(max_nb_chars=200).replace('\n', ' ')
     }
     subaperitivos.append(subaperitivo)

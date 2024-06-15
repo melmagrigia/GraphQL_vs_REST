@@ -1,5 +1,6 @@
 const { faker } = require('@faker-js/faker');
 const { Client } = require('pg');
+const { generateUsername } = require("unique-username-generator");
 
 // Configure PostgreSQL client
 const client = new Client({
@@ -15,35 +16,43 @@ async function seedDatabase() {
     await client.connect();
 
     // Number of records to generate
-    const numUsers = 10;
-    const numSubaperitivos = 5;
-    const numPosts = 20;
-    const numComments = 50;
+    const numUsers = 10000;
+    const numSubaperitivos = 5000;
+    const numPosts = 20000;
+    const numComments = 50000;
 
-    // Generate Users
-    const users = [];
-    for (let i = 0; i < numUsers; i++) {
-      const userName = faker.internet.userName();
-      const bio = faker.lorem.paragraph();
-      const res = await client.query('INSERT INTO Users (userName, bio) VALUES ($1, $2) RETURNING id', [userName, bio]);
-      users.push(res.rows[0].id);
+    // Generate unique Users
+    const users = new Set();
+    const userIds = [];
+    while (users.size < numUsers) {
+      const userName = generateUsername();
+      if (!users.has(userName)) {
+        const bio = faker.lorem.paragraph();
+        const res = await client.query('INSERT INTO Users (userName, bio) VALUES ($1, $2) RETURNING id', [userName, bio]);
+        userIds.push(res.rows[0].id);
+        users.add(userName);
+      }
     }
 
-    // Generate Subaperitivos
-    const subaperitivos = [];
-    for (let i = 0; i < numSubaperitivos; i++) {
-      const name = faker.lorem.word();
-      const description = faker.lorem.paragraph();
-      const res = await client.query('INSERT INTO Subaperitivos (name, description) VALUES ($1, $2) RETURNING id', [name, description]);
-      subaperitivos.push(res.rows[0].id);
+    // Generate unique Subaperitivos
+    const subaperitivos = new Set();
+    const subaperitivoIds = [];
+    while (subaperitivos.size < numSubaperitivos) {
+      const name = generateUsername();;
+      if (!subaperitivos.has(name)) {
+        const description = faker.lorem.paragraph();
+        const res = await client.query('INSERT INTO Subaperitivos (name, description) VALUES ($1, $2) RETURNING id', [name, description]);
+        subaperitivoIds.push(res.rows[0].id);
+        subaperitivos.add(name);
+      }
     }
 
     // Generate Posts
     const posts = [];
     for (let i = 0; i < numPosts; i++) {
       const title = faker.lorem.sentence();
-      const userId = users[Math.floor(Math.random() * users.length)];
-      const subaperitivoId = subaperitivos[Math.floor(Math.random() * subaperitivos.length)];
+      const userId = userIds[Math.floor(Math.random() * userIds.length)];
+      const subaperitivoId = subaperitivoIds[Math.floor(Math.random() * subaperitivoIds.length)];
       const voteCount = faker.datatype.number({ min: 0, max: 100 });
       const res = await client.query('INSERT INTO Posts (title, userId, subaperitivoId, voteCount) VALUES ($1, $2, $3, $4) RETURNING id', [title, userId, subaperitivoId, voteCount]);
       posts.push(res.rows[0].id);
@@ -52,7 +61,7 @@ async function seedDatabase() {
     // Generate Comments
     for (let i = 0; i < numComments; i++) {
       const commentContent = faker.lorem.paragraph();
-      const userId = users[Math.floor(Math.random() * users.length)];
+      const userId = userIds[Math.floor(Math.random() * userIds.length)];
       const postId = posts[Math.floor(Math.random() * posts.length)];
       const voteCount = faker.datatype.number({ min: 0, max: 100 });
       await client.query('INSERT INTO Comments (commentContent, userId, postId, voteCount) VALUES ($1, $2, $3, $4)', [commentContent, userId, postId, voteCount]);
