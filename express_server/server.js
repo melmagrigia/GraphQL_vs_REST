@@ -75,11 +75,15 @@ app.get('/posts/:id', async (req, res) => {
     }));
 
     const explainPostQuery = `EXPLAIN ANALYZE ${postQuery}`;
-    
+    const explainCommentsQuery = `EXPLAIN ANALYZE ${commentsQuery}`;
+
     // Run EXPLAIN ANALYZE queries
     const postQueryExplain = await pool.query(explainPostQuery, [postId]);
+    const commentsQueryExplain = await pool.query(explainCommentsQuery, [postId]);
 
     const postExecutionTime = extractExecutionTime(postQueryExplain);
+    const commentsExecutionTime = extractExecutionTime(commentsQueryExplain);
+
 
     // Construct the response
     const response = {
@@ -97,6 +101,7 @@ app.get('/posts/:id', async (req, res) => {
       comments: comments,
       executionTimes: {
         postExecutionTime: postExecutionTime,
+        commentsExecutionTime: commentsExecutionTime,
       }
     };
 
