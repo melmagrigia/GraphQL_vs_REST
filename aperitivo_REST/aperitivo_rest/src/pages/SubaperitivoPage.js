@@ -16,7 +16,7 @@ export const SubaperitivoPage = () => {
   useEffect(() => {
     const fetchSubaperitivo = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/subaperitivos/${id}`);
+        const response = await axios.get(`http://localhost:3008/subaperitivos/${id}`);
         setSubaperitivo(response.data);
       } catch (error) {
         setError(error);

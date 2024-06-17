@@ -2,7 +2,7 @@ const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors'); // Import the cors middleware
 const app = express();
-const port = 3000;
+const port = 3008;
 
 // Use CORS middleware
 app.use(cors({

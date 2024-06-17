@@ -17,7 +17,7 @@ export const UserPage = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/users/${id}`);
+        const response = await axios.get(`http://localhost:3008/users/${id}`);
         setUser(response.data);
       } catch (error) {
         setError(error);

@@ -14,7 +14,7 @@ export const HomePage = () => {
   useEffect(() => {
     const fetchHome = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/`);
+        const response = await axios.get(`http://localhost:3008/`);
         setData(response.data);
       } catch (error) {
         setError(error);
