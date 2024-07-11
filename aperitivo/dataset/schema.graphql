@@ -1,9 +1,9 @@
 type Comment {
   id: String! @id
-  commentContent: String!
+  commentContent: String! @search(by:[fulltext])
   user: User! @hasInverse(field:"comments")
   post: Post! @hasInverse(field:"comments")
-  voteCount: Int
+  voteCount: Int @search
 }
 
 type Subaperitivo {
@@ -19,7 +19,7 @@ type Post {
   title: String!
   user: User! @hasInverse(field:"posts")
   subaperitivo: Subaperitivo! @hasInverse(field:"posts")
-  voteCount: Int
+  voteCount: Int @search
   comments: [Comment] @hasInverse(field:"post")
 }
 
